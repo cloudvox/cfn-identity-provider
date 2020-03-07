@@ -82,6 +82,7 @@ Resources:
 
             responseData = {}
             responseData['Reason'] = reason
+            responseData['ProviderArn'] = provider_arn
             if res:
               cfnresponse.send(event, context, cfnresponse.SUCCESS, responseData, provider_arn)
             else:
@@ -115,3 +116,8 @@ Resources:
                   - logs:CreateLogStream
                   - logs:PutLogEvents
                 Resource: "*"
+
+Outputs:
+  ProviderArn:
+    Description: Arn of the Identity Provider
+    Value: !GetAtt 'IdentityProvider.ProviderArn'
